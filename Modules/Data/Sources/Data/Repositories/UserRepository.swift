@@ -17,7 +17,7 @@ public final class UserRepository: UserRepositoryProtocol {
     
     public func fetchUsers(perPage: Int, since: Int) -> AnyPublisher<[UserEntity], any Error> {
         return apiService.request(
-            endpoint: GetUsersEndpoint(perPage: perPage, since: since),
+            endpoint: GetUsersRequest(perPage: perPage, since: since),
             responseType: [UserDTO].self
         ).map {
             $0.map {
