@@ -9,7 +9,7 @@ import Foundation
 import Combine
 
 public protocol APIServiceProtocol {
-    func request<T: Codable>(endpoint: BaseRequest, responseType: T.Type) -> AnyPublisher<T, Error>
+    func request<T: Codable>(_ request: BaseRequest, responseType: T.Type) -> AnyPublisher<T, Error>
 }
 
 public final class APIService: APIServiceProtocol {
@@ -29,8 +29,8 @@ public final class APIService: APIServiceProtocol {
         self.session = URLSession(configuration: configuration)
     }
     
-    public func request<T: Codable>(endpoint: BaseRequest, responseType: T.Type) -> AnyPublisher<T, Error> {
-        guard let urlRequest = endpoint.urlRequest else {
+    public func request<T: Codable>(_ request: BaseRequest, responseType: T.Type) -> AnyPublisher<T, Error> {
+        guard let urlRequest = request.urlRequest else {
             return Fail(error: APIError.invalidURL).eraseToAnyPublisher()
         }
         

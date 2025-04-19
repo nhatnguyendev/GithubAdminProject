@@ -17,7 +17,7 @@ final class UserRepositoryTests: XCTestCase {
         var shouldError = false
         var mockResponseFilename: String?
         
-        func request<T>(endpoint: BaseRequest, responseType: T.Type) -> AnyPublisher<T, any Error> where T : Decodable, T : Encodable {
+        func request<T>(_ endpoint: BaseRequest, responseType: T.Type) -> AnyPublisher<T, any Error> where T : Decodable, T : Encodable {
             if shouldError {
                 return Fail(error: APIError.httpError(statusCode: 500, message: "Interal Error")).eraseToAnyPublisher()
             } else if let filename = mockResponseFilename, let mockResponse: T = MockDataHelper.loadJSONFile(filename: filename, type: T.self) {
