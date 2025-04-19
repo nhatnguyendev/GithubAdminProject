@@ -30,7 +30,7 @@ final class UserRepositoryTests: XCTestCase {
         }
     }
     
-    func test_fetchUsers() {
+    func test_fetchUsers_success() {
         
         let expectation = self.expectation(description: "Fetch users successfully")
         
