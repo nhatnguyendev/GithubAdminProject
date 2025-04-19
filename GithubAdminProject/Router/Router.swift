@@ -9,7 +9,7 @@ import Foundation
 
 final class Router: ObservableObject, RouterProtocol {
     
-    @Published var path = [Destination]()
+    @Published var path = [AppDestination]()
     
     func navigate(to destination: Destination) {
         path.append(destination)
