@@ -6,6 +6,10 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		D86F28A92DB3A2AA0062B7C5 /* Data in Frameworks */ = {isa = PBXBuildFile; productRef = D86F28A82DB3A2AA0062B7C5 /* Data */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		D820FA2B2DB39B680082CD61 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -45,6 +49,11 @@
 			path = GithubAdminProjectUITests;
 			sourceTree = "<group>";
 		};
+		D86F289A2DB3A2640062B7C5 /* Modules */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = Modules;
+			sourceTree = "<group>";
+		};
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,6 +61,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D86F28A92DB3A2AA0062B7C5 /* Data in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -75,9 +85,11 @@
 		D820FA112DB39B670082CD61 = {
 			isa = PBXGroup;
 			children = (
+				D86F289A2DB3A2640062B7C5 /* Modules */,
 				D820FA1C2DB39B670082CD61 /* GithubAdminProject */,
 				D820FA2D2DB39B680082CD61 /* GithubAdminProjectTests */,
 				D820FA372DB39B680082CD61 /* GithubAdminProjectUITests */,
+				D86F28A72DB3A2AA0062B7C5 /* Frameworks */,
 				D820FA1B2DB39B670082CD61 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -90,6 +102,13 @@
 				D820FA342DB39B680082CD61 /* GithubAdminProjectUITests.xctest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		D86F28A72DB3A2AA0062B7C5 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -109,9 +128,11 @@
 			);
 			fileSystemSynchronizedGroups = (
 				D820FA1C2DB39B670082CD61 /* GithubAdminProject */,
+				D86F289A2DB3A2640062B7C5 /* Modules */,
 			);
 			name = GithubAdminProject;
 			packageProductDependencies = (
+				D86F28A82DB3A2AA0062B7C5 /* Data */,
 			);
 			productName = GithubAdminProject;
 			productReference = D820FA1A2DB39B670082CD61 /* GithubAdminProject.app */;
@@ -570,6 +591,13 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		D86F28A82DB3A2AA0062B7C5 /* Data */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Data;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = D820FA122DB39B670082CD61 /* Project object */;
 }
