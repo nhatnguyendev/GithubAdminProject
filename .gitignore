@@ -1,0 +1,35 @@
+# Xcode
+build/
+DerivedData/
+*.pbxuser
+xcuserdata/
+*.xcscmblueprint
+*.xcuserstate
+
+# SwiftPM
+.build/
+.swiftpm/
+
+# CocoaPods
+Pods/
+
+# Carthage
+Carthage/
+
+# Fastlane
+fastlane/report.xml
+fastlane/screenshots
+fastlane/test_output
+
+# Code coverage
+*.xccoverage
+
+# Archive
+*.xcarchive
+
+# User-specific
+*.DS_Store
+
+# Firebase
+GoogleService-Info.plist
+
