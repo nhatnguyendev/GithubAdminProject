@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D81A6CDF2DB40EFF00DE36E0 /* Domain in Frameworks */ = {isa = PBXBuildFile; productRef = D81A6CDE2DB40EFF00DE36E0 /* Domain */; };
+		D81A6CE12DB40EFF00DE36E0 /* Presentation in Frameworks */ = {isa = PBXBuildFile; productRef = D81A6CE02DB40EFF00DE36E0 /* Presentation */; };
 		D86F28A92DB3A2AA0062B7C5 /* Data in Frameworks */ = {isa = PBXBuildFile; productRef = D86F28A82DB3A2AA0062B7C5 /* Data */; };
 /* End PBXBuildFile section */
 
@@ -61,6 +63,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D81A6CDF2DB40EFF00DE36E0 /* Domain in Frameworks */,
+				D81A6CE12DB40EFF00DE36E0 /* Presentation in Frameworks */,
 				D86F28A92DB3A2AA0062B7C5 /* Data in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -133,6 +137,8 @@
 			name = GithubAdminProject;
 			packageProductDependencies = (
 				D86F28A82DB3A2AA0062B7C5 /* Data */,
+				D81A6CDE2DB40EFF00DE36E0 /* Domain */,
+				D81A6CE02DB40EFF00DE36E0 /* Presentation */,
 			);
 			productName = GithubAdminProject;
 			productReference = D820FA1A2DB39B670082CD61 /* GithubAdminProject.app */;
@@ -593,6 +599,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		D81A6CDE2DB40EFF00DE36E0 /* Domain */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Domain;
+		};
+		D81A6CE02DB40EFF00DE36E0 /* Presentation */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Presentation;
+		};
 		D86F28A82DB3A2AA0062B7C5 /* Data */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = Data;
