@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-public struct UserRowView: View {
+public struct UserListItemView: View {
     
     let avatar: URL
     let name: String
@@ -66,13 +66,14 @@ public struct UserRowView: View {
         .expandWidth(alignment: .leading)
         .background(.white)
         .cornerRadius(DesignSystem.CornerRadius.small)
-        .customShadow(color: .black.opacity(0.5))
-        .padding(.horizontal, DesignSystem.Padding.large)
+        .customShadow(color: .black.opacity(0.3))
+        .padding(.horizontal, DesignSystem.Padding.medium)
+        .padding(.vertical, DesignSystem.Padding.small)
     }
 }
 
 #Preview {
-    UserRowView(
+    UserListItemView(
         avatar: URL(string: "https://avatars.githubusercontent.com/u/101?v=4")!,
         name: "Test Name",
         link: "https://linkedin"

@@ -19,7 +19,7 @@ public struct UsersListView: View {
     
     public var body: some View {
         List(viewModel.users) { user in
-            UserRowView(
+            UserListItemView(
                 avatar: URL(string: user.avatarURL)!,
                 name: user.login,
                 link: user.htmlURL
