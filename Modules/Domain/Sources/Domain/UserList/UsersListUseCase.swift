@@ -13,14 +13,21 @@ public protocol UsersListUseCaseProtocol {
 }
 
 public final class UsersListUseCase: UsersListUseCaseProtocol {
-    
+    private let paginationPolicy: PaginationPolicy
     private let userRepository: UserRepositoryProtocol
     
-    public init(userRepository: UserRepositoryProtocol) {
+    public init(
+        paginationPolicy: PaginationPolicy = DefaultPaginationPolicy(),
+        userRepository: UserRepositoryProtocol
+    ) {
+        self.paginationPolicy = paginationPolicy
         self.userRepository = userRepository
     }
     
     public func getUsers(since: Int) -> AnyPublisher<[UserEntity], any Error> {
-        return userRepository.fetchUsers(perPage: 20, since: since)
+        return userRepository.fetchUsers(
+            perPage: paginationPolicy.itemsPerPage,
+            since: since
+        )
     }
 }
