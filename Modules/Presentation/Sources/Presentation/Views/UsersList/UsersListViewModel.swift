@@ -11,7 +11,7 @@ import Combine
 
 public final class UsersListViewModel: ObservableObject {
     
-    @Published private(set) var users: [UserEntity] = [ UserEntity.mock ]
+    @Published private(set) var users: [UserEntity] = []
     
     private var cancellables: Set<AnyCancellable> = []
     
