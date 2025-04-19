@@ -38,13 +38,15 @@ final class UserRepositoryTests: XCTestCase {
         apiService.mockResponseFilename = "Users"
         
         let userRepository = UserRepository(apiService: apiService)
-        userRepository.fetchUsers(since: 0)
+        userRepository.fetchUsers(perPage: 2, since: 0)
             .sink { completion in
                 if case .failure(let error) = completion {
                     XCTFail("Expected success but got error: \(error)")
                 }
             } receiveValue: { users in
                 XCTAssertEqual(users.count, 2)
+                let firstUser = users.first
+                XCTAssertEqual(firstUser?.login, "jvantuyl")
                 expectation.fulfill()
             }
             .store(in: &cancellables)
@@ -60,7 +62,7 @@ final class UserRepositoryTests: XCTestCase {
         apiService.shouldError = true
         
         let userRepository = UserRepository(apiService: apiService)
-        userRepository.fetchUsers(since: 0)
+        userRepository.fetchUsers(perPage: 2, since: 0)
             .sink { completion in
                 if case .failure(let error) = completion {
                     XCTAssertTrue(error is APIError, "Expected error to be of type APIError")
