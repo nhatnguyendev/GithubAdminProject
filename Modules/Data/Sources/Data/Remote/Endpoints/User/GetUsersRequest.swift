@@ -13,7 +13,7 @@ struct GetUsersRequest: BaseRequest {
     var since: Int
     
     var path: String {
-        return "https://api.github.com/users"
+        return "/users"
     }
     
     var method: HTTPMethod {

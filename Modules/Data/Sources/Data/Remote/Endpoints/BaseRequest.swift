@@ -15,6 +15,7 @@ public enum HTTPMethod: String {
 }
 
 public protocol BaseRequest {
+    var baseUrl: String { get }
     var path: String { get }
     var method: HTTPMethod { get }
     var parameters: [String: Any]? { get }
@@ -26,6 +27,10 @@ public protocol BaseRequest {
 
 public extension BaseRequest {
     
+    var baseUrl: String {
+        return "https://api.github.com"
+    }
+    
     var headers: [String: String]? {
         return [
             "Content-Type": "application/json;charset=utf-8"
@@ -34,7 +39,7 @@ public extension BaseRequest {
     
     var urlRequest: URLRequest? {
         
-        guard var components = URLComponents(string: path) else { return nil }
+        guard var components = URLComponents(string: baseUrl + path) else { return nil }
         components.queryItems = queryItems
         
         guard let url = components.url else { return nil }
