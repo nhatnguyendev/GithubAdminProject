@@ -6,16 +6,6 @@ xcuserdata/
 *.xcscmblueprint
 *.xcuserstate
 
-# SwiftPM
-.build/
-.swiftpm/
-
-# CocoaPods
-Pods/
-
-# Carthage
-Carthage/
-
 # Fastlane
 fastlane/report.xml
 fastlane/screenshots
