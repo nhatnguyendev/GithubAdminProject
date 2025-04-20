@@ -36,6 +36,13 @@ final class UsersListViewModelTests: XCTestCase {
         cancellables = []
     }
     
+    override func tearDown() {
+        mockUseCase = nil
+        viewModel = nil
+        cancellables = nil
+        super.tearDown()
+    }
+    
     func test_getUsers_firstPage_success() {
         let itemsPerPage = mockUseCase.paginationPolicy.itemsPerPage
         let testUsers = (1...itemsPerPage).map { _ in

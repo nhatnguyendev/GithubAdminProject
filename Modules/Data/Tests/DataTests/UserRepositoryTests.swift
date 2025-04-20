@@ -11,7 +11,21 @@ import Combine
 
 final class UserRepositoryTests: XCTestCase {
     
-    private var cancellables: Set<AnyCancellable> = []
+    var apiService: MockAPIService!
+    var cancellables: Set<AnyCancellable>!
+    
+    override func setUp() {
+        super.setUp()
+        
+        apiService = MockAPIService()
+        cancellables = []
+    }
+    
+    override func tearDown() {
+        apiService = nil
+        cancellables = nil
+        super.tearDown()
+    }
     
     final class MockAPIService: APIServiceProtocol {
         var shouldError = false
@@ -34,7 +48,6 @@ final class UserRepositoryTests: XCTestCase {
         
         let expectation = self.expectation(description: "Fetch users successfully")
         
-        let apiService = MockAPIService()
         apiService.mockResponseFilename = "Users"
         
         let userRepository = UserRepository(apiService: apiService)
@@ -57,7 +70,6 @@ final class UserRepositoryTests: XCTestCase {
     func test_fetchUsers_failure() {
         let expectation = self.expectation(description: "Fetch users fails")
         
-        let apiService = MockAPIService()
         apiService.mockResponseFilename = "Users"
         apiService.shouldError = true
         
@@ -79,7 +91,7 @@ final class UserRepositoryTests: XCTestCase {
     func test_fetchUserDetail_success() {
         let expectation = self.expectation(description: "Fetch user detail successfully")
         let loginUserName = "BrianTheCoder"
-        let apiService = MockAPIService()
+        
         apiService.mockResponseFilename = "UserDetail"
         
         let userRepository = UserRepository(apiService: apiService)
@@ -100,7 +112,7 @@ final class UserRepositoryTests: XCTestCase {
     func test_fetchUserDetail_failure() {
         let expectation = self.expectation(description: "Fetch user detail fails")
         let loginUserName = "BrianTheCoder"
-        let apiService = MockAPIService()
+        
         apiService.mockResponseFilename = "UserDetail"
         apiService.shouldError = true
         

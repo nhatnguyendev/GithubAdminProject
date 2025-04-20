@@ -25,6 +25,12 @@ final class UserListUseCaseTests: XCTestCase {
         cancellables = []
     }
     
+    override func tearDown() {
+        mockUserRepository = nil
+        cancellables = nil
+        super.tearDown()
+    }
+    
     func test_getUsers_success() {
         let expectation = self.expectation(description: "Get users successfully")
         

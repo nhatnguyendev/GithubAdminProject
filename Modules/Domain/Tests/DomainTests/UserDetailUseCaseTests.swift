@@ -21,8 +21,14 @@ final class UserDetailUseCaseTests: XCTestCase {
         cancellables = []
     }
     
+    override func tearDown() {
+        mockUserRepository = nil
+        cancellables = nil
+        super.tearDown()
+    }
+    
     func test_getUserDetail_success() {
-        let expectation = self.expectation(description: "Get users successfully")
+        let expectation = self.expectation(description: "Get user details successfully")
         let loginUserName = "lukesutton"
         let userDetailUseCase = UserDetailUseCase(userRepository: mockUserRepository)
         userDetailUseCase.getUserDetail(loginUserName: loginUserName)

@@ -38,6 +38,13 @@ final class UserDetailsViewModelTests: XCTestCase {
         cancellables = []
     }
     
+    override func tearDown() {
+        mockUseCase = nil
+        viewModel = nil
+        cancellables = nil
+        super.tearDown()
+    }
+    
     func test_getUserDetails_success() {
         let expectation = expectation(description: "Load user details successfully")
         viewModel.$user
