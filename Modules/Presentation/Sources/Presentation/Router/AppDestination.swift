@@ -6,5 +6,5 @@
 //
 
 public enum AppDestination: Hashable {
-    case userDetail(id: String)
+    case userDetail(loginUserName: String)
 }

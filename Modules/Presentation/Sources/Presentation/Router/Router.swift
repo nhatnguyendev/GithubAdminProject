@@ -11,6 +11,8 @@ public final class Router: ObservableObject, RouterProtocol {
     
     @Published public var path = [AppDestination]()
     
+    public init() { }
+    
     public func navigate(to destination: Destination) {
         path.append(destination)
     }

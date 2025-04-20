@@ -11,6 +11,7 @@ import Data
 
 public struct UsersListView: View {
     
+    @EnvironmentObject var router: Router
     @StateObject private var viewModel: UsersListViewModel
     
     public init(viewModel: UsersListViewModel) {
@@ -31,6 +32,9 @@ public struct UsersListView: View {
                     if viewModel.isLastItem(user) {
                         viewModel.getUsers(isInitial: false)
                     }
+                }
+                .onTapGesture {
+                    router.navigate(to: .userDetail(loginUserName: user.login))
                 }
             }
             

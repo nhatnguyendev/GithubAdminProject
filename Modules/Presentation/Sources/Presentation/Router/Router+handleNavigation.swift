@@ -7,6 +7,8 @@
 
 import Foundation
 import SwiftUI
+import Domain
+import Data
 
 public extension Router {
     
@@ -14,8 +16,17 @@ public extension Router {
     @ViewBuilder
     func handleNavigation(for destination: Destination) -> some View {
         switch destination {
-        case .userDetail(let id):
-            Text("User: \(id)")
+        case .userDetail(let loginUserName):
+            UserDetailView(
+                viewModel: .init(
+                    loginUserName: loginUserName,
+                    userDetailUseCase: UserDetailUseCase(
+                        userRepository: UserRepository(
+                            apiService: APIService()
+                        )
+                    )
+                )
+            )
         }
     }
 }
