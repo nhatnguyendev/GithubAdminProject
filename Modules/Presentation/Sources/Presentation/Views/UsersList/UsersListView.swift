@@ -26,6 +26,11 @@ public struct UsersListView: View {
             )
             .zeroListPadding()
             .listRowSeparator(.hidden)
+            .onAppear {
+                if viewModel.isLastItem(user) {
+                    viewModel.getUsers(isInitial: false)
+                }
+            }
         }
         .listStyle(.plain)
         .onAppear {
