@@ -26,7 +26,12 @@ public struct UserEntity: Sendable, Identifiable {
     public let receivedEventsURL: String
     public let type: String
     public let userViewType: String
+    public let location: String
+    public let blog: String
     public let isSiteAdmin: Bool
+    
+    public let followers: Int
+    public let following: Int
 
     public init(
         login: String,
@@ -47,7 +52,11 @@ public struct UserEntity: Sendable, Identifiable {
         receivedEventsURL: String,
         type: String,
         userViewType: String,
-        isSiteAdmin: Bool
+        location: String,
+        blog: String,
+        isSiteAdmin: Bool,
+        followers: Int,
+        following: Int
     ) {
         self.login = login
         self.id = id
@@ -67,7 +76,11 @@ public struct UserEntity: Sendable, Identifiable {
         self.receivedEventsURL = receivedEventsURL
         self.type = type
         self.userViewType = userViewType
+        self.location = location
+        self.blog = blog
         self.isSiteAdmin = isSiteAdmin
+        self.followers = followers
+        self.following = following
     }
 }
 
@@ -91,6 +104,10 @@ public extension UserEntity {
         receivedEventsURL: "https://api.github.com/users/lukesutton/received_events",
         type: "User",
         userViewType: "public",
-        isSiteAdmin: false
+        location: "",
+        blog: "http://souja.net",
+        isSiteAdmin: false,
+        followers: 50,
+        following: 100
     )
 }

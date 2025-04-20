@@ -27,7 +27,12 @@ public struct UserDTO: Codable {
     let receivedEventsURL: String?
     let type: String?
     let userViewType: String?
+    let location: String?
+    let blog: String?
     let siteAdmin: Bool?
+    
+    let followers: Int?
+    let following: Int?
 
     enum CodingKeys: String, CodingKey {
         case login
@@ -48,7 +53,11 @@ public struct UserDTO: Codable {
         case receivedEventsURL = "received_events_url"
         case type
         case userViewType = "user_view_type"
+        case location
+        case blog
         case siteAdmin = "site_admin"
+        case followers
+        case following
     }
 }
 
@@ -73,7 +82,11 @@ public extension UserDTO {
             receivedEventsURL: receivedEventsURL ?? "",
             type: type ?? "",
             userViewType: userViewType ?? "",
-            isSiteAdmin: siteAdmin ?? false
+            location: location ?? "",
+            blog: blog ?? "",
+            isSiteAdmin: siteAdmin ?? false,
+            followers: followers ?? 0,
+            following: following ?? 0
         )
     }
 }

@@ -20,9 +20,7 @@ struct GetUserDetailRequest: BaseRequest {
     }
     
     var parameters: [String : Any]? {
-        return [
-            "login_username": loginUserName
-        ]
+        return nil
     }
     
     var queryItems: [URLQueryItem]? {

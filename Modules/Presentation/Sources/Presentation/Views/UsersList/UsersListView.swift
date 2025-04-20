@@ -22,7 +22,7 @@ public struct UsersListView: View {
         List {
             ForEach(viewModel.users) { user in
                 UserListItemView(
-                    avatar: URL(string: user.avatarURL)!,
+                    avatar: URL(string: user.avatarURL),
                     name: user.login,
                     link: user.htmlURL
                 )

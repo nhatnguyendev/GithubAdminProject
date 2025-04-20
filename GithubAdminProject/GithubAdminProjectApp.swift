@@ -6,12 +6,32 @@
 //
 
 import SwiftUI
+import Domain
+import Data
+import Presentation
 
 @main
 struct GithubAdminProjectApp: App {
+    
+    @StateObject var router = Router()
+    
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            NavigationStack(path: $router.path) {
+                UsersListView(
+                    viewModel: .init(
+                        usersListUseCase: UsersListUseCase(
+                            userRepository: UserRepository(
+                                apiService: APIService()
+                            )
+                        )
+                    )
+                )
+                .navigationDestination(for: AppDestination.self) { des in
+                    router.handleNavigation(for: des)
+                }
+            }
+            .environmentObject(router)
         }
     }
 }

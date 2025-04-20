@@ -11,7 +11,31 @@ import Combine
 
 public final class UserDetailViewModel: ObservableObject {
     
-    @Published private(set) var user: UserEntity? = UserEntity.mock // TODO: remove mock
+    @Published private(set) var user: UserEntity?
+    
+    var avatar: URL? {
+        return URL(string: user?.avatarURL ?? "")
+    }
+    
+    var name: String {
+        return user?.login ?? ""
+    }
+    
+    var location: String {
+        return user?.location ?? ""
+    }
+    
+    var noOfFollowers: Int {
+        return user?.followers ?? 0
+    }
+    
+    var noOfFollowing: Int {
+        return user?.following ?? 0
+    }
+    
+    var blog: String {
+        return user?.blog ?? ""
+    }
     
     private var cancellables: Set<AnyCancellable> = []
     

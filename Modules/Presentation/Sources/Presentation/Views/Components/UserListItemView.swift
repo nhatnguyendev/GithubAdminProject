@@ -9,16 +9,23 @@ import SwiftUI
 
 public struct UserListItemView: View {
     
-    let avatar: URL
+    let avatar: URL?
     let name: String
-    let link: String
+    let link: String?
+    let location: String?
     
     let imageSize: CGFloat = DesignSystem.ImageSize.xxLarge
     
-    public init(avatar: URL, name: String, link: String) {
+    public init(
+        avatar: URL? = nil,
+        name: String,
+        link: String? = nil,
+        location: String? = nil
+    ) {
         self.avatar = avatar
         self.name = name
         self.link = link
+        self.location = location
     }
     
     public var body: some View {
@@ -50,15 +57,21 @@ public struct UserListItemView: View {
                 .background(.gray.opacity(0.06))
                 .cornerRadius(DesignSystem.CornerRadius.small)
                 
-                VStack(alignment: .leading, spacing: DesignSystem.Padding.xSmall) {
+                VStack(alignment: .leading, spacing: DesignSystem.Padding.small) {
                     Text(name)
                         .font(.headline)
                     
                     Divider()
                     
-                    Text(link)
-                        .font(.subheadline)
-                        .foregroundColor(.blue.opacity(0.5))
+                    if let link {
+                        Text(link)
+                            .font(.subheadline)
+                            .foregroundColor(.blue.opacity(0.5))
+                    }
+                    
+                    if let location {
+                        LocationLabelView(locationName: location)
+                    }
                 }
             }
             .padding()
