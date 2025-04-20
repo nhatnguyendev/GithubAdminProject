@@ -48,6 +48,8 @@ public struct UsersListView: View {
             }
         }
         .listStyle(.plain)
+        .navigationTitle("Github Users")
+        .navigationBarTitleDisplayMode(.inline)
         .onAppear {
             if viewModel.users.isEmpty {
                 viewModel.getUsers()

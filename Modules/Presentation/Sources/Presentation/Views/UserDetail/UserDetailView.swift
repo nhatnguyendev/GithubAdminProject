@@ -54,5 +54,7 @@ public struct UserDetailView: View {
         .onAppear {
             viewModel.getUserDetail()
         }
+        .navigationTitle("User Details")
+        .navigationBarTitleDisplayMode(.inline)
     }
 }
