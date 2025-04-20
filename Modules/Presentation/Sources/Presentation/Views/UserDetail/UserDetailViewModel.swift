@@ -40,7 +40,7 @@ public final class UserDetailViewModel: ObservableObject {
     private var cancellables: Set<AnyCancellable> = []
     
     private let userDetailUseCase: UserDetailUseCaseProtocol
-    private let loginUserName: String
+    let loginUserName: String
     
     public init(
         loginUserName: String,
