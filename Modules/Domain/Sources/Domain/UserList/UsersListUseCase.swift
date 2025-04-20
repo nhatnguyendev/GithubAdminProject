@@ -9,11 +9,12 @@ import Foundation
 import Combine
 
 public protocol UsersListUseCaseProtocol {
+    var paginationPolicy: PaginationPolicy { get }
     func getUsers(since: Int) -> AnyPublisher<[UserEntity], Error>
 }
 
 public final class UsersListUseCase: UsersListUseCaseProtocol {
-    private let paginationPolicy: PaginationPolicy
+    public var paginationPolicy: PaginationPolicy
     private let userRepository: UserRepositoryProtocol
     
     public init(

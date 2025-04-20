@@ -33,17 +33,25 @@ final class UserListUseCaseTests: XCTestCase {
         }
     }
     
+    struct MockPaginationPolicy: PaginationPolicy {
+        var itemsPerPage: Int = 2
+    }
+    
     func test_getUsers_success() {
         let expectation = self.expectation(description: "Get users successfully")
         let mockRepository = MockUserRepository()
         
-        let userListUseCase = UsersListUseCase(userRepository: mockRepository)
+        let userListUseCase = UsersListUseCase(
+            paginationPolicy: MockPaginationPolicy(),
+            userRepository: mockRepository
+        )
         userListUseCase.getUsers(since: 0)
             .sink { completion in
                 if case .failure(let error) = completion {
                     XCTFail("Expected success but got error: \(error)")
                 }
             } receiveValue: { users in
+                XCTAssertEqual(userListUseCase.paginationPolicy.itemsPerPage, 2)
                 XCTAssertEqual(users.count, 2)
                 let firstUser = users.first
                 XCTAssertEqual(firstUser?.login, "lukesutton")
