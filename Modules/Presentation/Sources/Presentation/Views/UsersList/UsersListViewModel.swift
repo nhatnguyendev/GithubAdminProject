@@ -12,10 +12,10 @@ import Combine
 public final class UsersListViewModel: ObservableObject {
     
     @Published private(set) var users: [UserEntity] = []
-    @Published var isLoading = false
-    @Published private var hasMoreData = true
+    @Published private(set) var isLoading = false
+    @Published private(set) var hasMoreData = true
     
-    private var currentPage = 0
+    private(set) var currentPage = 0
     
     private var cancellables: Set<AnyCancellable> = []
     
