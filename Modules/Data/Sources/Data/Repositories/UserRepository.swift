@@ -26,9 +26,12 @@ public final class UserRepository: UserRepositoryProtocol {
         }.eraseToAnyPublisher()
     }
     
-    public func fetchUserDetail(id: String) -> AnyPublisher<UserEntity, any Error> {
-        return Just(
-            UserEntity.mock
-        ).setFailureType(to: Error.self).eraseToAnyPublisher()
+    public func fetchUserDetail(loginUserName: String) -> AnyPublisher<UserEntity, any Error> {
+        return apiService.request(
+            GetUserDetailRequest(loginUserName: loginUserName),
+            responseType: UserDTO.self
+        ).map {
+            $0.toDomain()
+        }.eraseToAnyPublisher()
     }
 }

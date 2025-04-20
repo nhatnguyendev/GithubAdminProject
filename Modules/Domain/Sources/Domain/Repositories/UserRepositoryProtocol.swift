@@ -10,5 +10,5 @@ import Combine
 
 public protocol UserRepositoryProtocol {
     func fetchUsers(perPage: Int, since: Int) -> AnyPublisher<[UserEntity], Error>
-    func fetchUserDetail(id: String) -> AnyPublisher<UserEntity, Error>
+    func fetchUserDetail(loginUserName: String) -> AnyPublisher<UserEntity, Error>
 }

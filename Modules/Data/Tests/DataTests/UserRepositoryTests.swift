@@ -75,4 +75,47 @@ final class UserRepositoryTests: XCTestCase {
         
         wait(for: [expectation], timeout: 1.0)
     }
+    
+    func test_fetchUserDetail_success() {
+        let expectation = self.expectation(description: "Fetch user detail successfully")
+        let loginUserName = "BrianTheCoder"
+        let apiService = MockAPIService()
+        apiService.mockResponseFilename = "UserDetail"
+        
+        let userRepository = UserRepository(apiService: apiService)
+        userRepository.fetchUserDetail(loginUserName: loginUserName)
+            .sink { completion in
+                if case .failure(let error) = completion {
+                    XCTFail("Expected success but got error: \(error)")
+                }
+            } receiveValue: { user in
+                XCTAssertEqual(user.login, loginUserName)
+                expectation.fulfill()
+            }
+            .store(in: &cancellables)
+        
+        wait(for: [expectation], timeout: 1.0)
+    }
+    
+    func test_fetchUserDetail_failure() {
+        let expectation = self.expectation(description: "Fetch user detail fails")
+        let loginUserName = "BrianTheCoder"
+        let apiService = MockAPIService()
+        apiService.mockResponseFilename = "UserDetail"
+        apiService.shouldError = true
+        
+        let userRepository = UserRepository(apiService: apiService)
+        userRepository.fetchUserDetail(loginUserName: loginUserName)
+            .sink { completion in
+                if case .failure(let error) = completion {
+                    XCTAssertTrue(error is APIError, "Expected error to be of type APIError")
+                    expectation.fulfill()
+                }
+            } receiveValue: { user in
+                XCTFail("Expected failure")
+            }
+            .store(in: &cancellables)
+        
+        wait(for: [expectation], timeout: 1.0)
+    }
 }
