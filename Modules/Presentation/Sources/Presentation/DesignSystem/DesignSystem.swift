@@ -23,6 +23,7 @@ public struct DesignSystem {
         static let large: CGFloat = 50
         static let xLarge: CGFloat = 60
         static let xxLarge: CGFloat = 70
+        static let xxxLarge: CGFloat = 80
     }
     
     public struct CornerRadius {
