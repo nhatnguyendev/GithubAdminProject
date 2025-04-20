@@ -18,17 +18,28 @@ public struct UsersListView: View {
     }
     
     public var body: some View {
-        List(viewModel.users) { user in
-            UserListItemView(
-                avatar: URL(string: user.avatarURL)!,
-                name: user.login,
-                link: user.htmlURL
-            )
-            .zeroListPadding()
-            .listRowSeparator(.hidden)
-            .onAppear {
-                if viewModel.isLastItem(user) {
-                    viewModel.getUsers(isInitial: false)
+        List {
+            ForEach(viewModel.users) { user in
+                UserListItemView(
+                    avatar: URL(string: user.avatarURL)!,
+                    name: user.login,
+                    link: user.htmlURL
+                )
+                .zeroListPadding()
+                .listRowSeparator(.hidden)
+                .onAppear {
+                    if viewModel.isLastItem(user) {
+                        viewModel.getUsers(isInitial: false)
+                    }
+                }
+            }
+            
+            if viewModel.isLoading {
+                HStack {
+                    Spacer()
+                    ProgressView()
+                        .padding()
+                    Spacer()
                 }
             }
         }
