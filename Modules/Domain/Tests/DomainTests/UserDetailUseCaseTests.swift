@@ -2,18 +2,14 @@
 //  File.swift
 //  Domain
 //
-//  Created by Nhat Nguyen on 19/4/25.
+//  Created by Nhat Nguyen on 20/4/25.
 //
 
 import XCTest
 import Combine
 @testable import Domain
 
-final class UserListUseCaseTests: XCTestCase {
-    
-    struct MockPaginationPolicy: PaginationPolicy {
-        var itemsPerPage: Int = 2
-    }
+final class UserDetailUseCaseTests: XCTestCase {
     
     var mockUserRepository: MockUserRepository!
     var cancellables: Set<AnyCancellable>!
@@ -25,27 +21,20 @@ final class UserListUseCaseTests: XCTestCase {
         cancellables = []
     }
     
-    func test_getUsers_success() {
+    func test_getUserDetail_success() {
         let expectation = self.expectation(description: "Get users successfully")
-        
-        let userListUseCase = UsersListUseCase(
-            paginationPolicy: MockPaginationPolicy(),
-            userRepository: mockUserRepository
-        )
-        userListUseCase.getUsers(since: 0)
+        let loginUserName = "lukesutton"
+        let userDetailUseCase = UserDetailUseCase(userRepository: mockUserRepository)
+        userDetailUseCase.getUserDetail(loginUserName: loginUserName)
             .sink { completion in
                 if case .failure(let error) = completion {
                     XCTFail("Expected success but got error: \(error)")
                 }
-            } receiveValue: { users in
-                XCTAssertEqual(userListUseCase.paginationPolicy.itemsPerPage, 2)
-                XCTAssertEqual(users.count, 2)
-                let firstUser = users.first
-                XCTAssertEqual(firstUser?.login, "lukesutton")
+            } receiveValue: { user in
+                XCTAssertEqual(user.login, loginUserName)
                 expectation.fulfill()
             }
             .store(in: &cancellables)
-        
         wait(for: [expectation], timeout: 1.0)
     }
 }
