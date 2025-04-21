@@ -12,18 +12,21 @@ import Combine
 final class UserRepositoryTests: XCTestCase {
     
     var apiService: MockAPIService!
+    var localDataSource: MockUserLocalDataSource!
     var cancellables: Set<AnyCancellable>!
     
     override func setUp() {
         super.setUp()
         
         apiService = MockAPIService()
+        localDataSource = MockUserLocalDataSource()
         cancellables = []
     }
     
     override func tearDown() {
         apiService = nil
         cancellables = nil
+        localDataSource = nil
         super.tearDown()
     }
     
@@ -44,6 +47,18 @@ final class UserRepositoryTests: XCTestCase {
         }
     }
     
+    final class MockUserLocalDataSource: UserLocalDataSourceProtocol {
+        private(set) var cachedUsers: [RealmUser] = []
+
+        func getCachedUsers() -> [RealmUser] {
+            return cachedUsers
+        }
+
+        func cacheUsers(_ users: [RealmUser]) {
+            cachedUsers = users
+        }
+    }
+
     func test_fetchUsers_success() {
         
         let expectation = self.expectation(description: "Fetch users successfully")
@@ -129,5 +144,20 @@ final class UserRepositoryTests: XCTestCase {
             .store(in: &cancellables)
         
         wait(for: [expectation], timeout: 1.0)
+    }
+    
+    func test_getCachedUsers_shouldReturnUsersFromLocal() {
+        let testName = "John"
+        let dummyUser = RealmUser()
+        dummyUser.login = testName
+        dummyUser.id = 123
+        localDataSource.cacheUsers([dummyUser])
+        
+        let repository = UserRepository(apiService: apiService, localDataSource: localDataSource)
+        
+        let cached = repository.getCachedUsers()
+        
+        XCTAssertEqual(cached.count, 1)
+        XCTAssertEqual(cached.first?.login, testName)
     }
 }

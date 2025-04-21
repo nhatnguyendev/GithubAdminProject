@@ -14,7 +14,7 @@ public final class UserRepository: UserRepositoryProtocol {
     
     public init(
         apiService: APIServiceProtocol,
-        localDataSource: UserLocalDataSourceProtocol
+        localDataSource: UserLocalDataSourceProtocol = UserLocalDataSource()
     ) {
         self.apiService = apiService
         self.localDataSource = localDataSource

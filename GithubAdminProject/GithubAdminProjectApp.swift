@@ -22,10 +22,7 @@ struct GithubAdminProjectApp: App {
                     viewModel: .init(
                         usersListUseCase: UsersListUseCase(
                             userRepository: UserRepository(
-                                apiService: APIService(),
-                                localDataSource: UserLocalDataSource(
-                                    realmManager: RealmManager()
-                                )
+                                apiService: APIService()
                             )
                         )
                     )
