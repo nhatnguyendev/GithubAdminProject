@@ -25,7 +25,7 @@ final class RealmManagerTests: XCTestCase {
         realmManager = nil
     }
 
-    func testWriteSingleObject() throws {
+    func test_write_singleObject() throws {
         let name = "test_user"
         let user = RealmUser()
         user.login = name
@@ -36,7 +36,7 @@ final class RealmManagerTests: XCTestCase {
         XCTAssertEqual(results.first?.login, name)
     }
 
-    func testWriteMultipleObjects() throws {
+    func test_write_MultipleObjects() throws {
         let user1 = RealmUser()
         user1.login = "a"
         let user2 = RealmUser()
