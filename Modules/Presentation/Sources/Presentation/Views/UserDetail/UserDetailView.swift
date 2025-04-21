@@ -26,13 +26,13 @@ public struct UserDetailView: View {
             HStack(spacing: 55) {
                 StatInfoView(
                     iconName: "person.2.fill",
-                    countText: "\(viewModel.noOfFollowers)",
+                    countText: "\(CountFormatter.display(for: viewModel.noOfFollowers))",
                     label: "Followers"
                 )
                 
                 StatInfoView(
                     iconName: "person.crop.square.fill",
-                    countText: "\(viewModel.noOfFollowing)",
+                    countText: "\(CountFormatter.display(for: viewModel.noOfFollowing))",
                     label: "Following"
                 )
             }
