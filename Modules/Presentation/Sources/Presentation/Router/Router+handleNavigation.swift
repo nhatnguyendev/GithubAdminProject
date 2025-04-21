@@ -22,7 +22,10 @@ public extension Router {
                     loginUserName: loginUserName,
                     userDetailUseCase: UserDetailUseCase(
                         userRepository: UserRepository(
-                            apiService: APIService()
+                            apiService: APIService(),
+                            localDataSource: UserLocalDataSource(
+                                realmManager: RealmManager()
+                            )
                         )
                     )
                 )

@@ -63,7 +63,10 @@ public struct UsersListView: View {
         viewModel: .init(
             usersListUseCase: UsersListUseCase(
                 userRepository: UserRepository(
-                    apiService: APIService()
+                    apiService: APIService(),
+                    localDataSource: UserLocalDataSource(
+                        realmManager: RealmManager()
+                    )
                 )
             )
         )
