@@ -15,7 +15,8 @@ let package = Package(
             targets: ["Data"]),
     ],
     dependencies: [
-        .package(path: "../Domain")
+        .package(path: "../Domain"),
+        .package(url: "https://github.com/realm/realm-cocoa.git", from: "10.0.0"),
     ],
     targets: [
         // Targets are the basic building blocks of a package, defining a module or a test suite.
@@ -23,7 +24,8 @@ let package = Package(
         .target(
             name: "Data",
             dependencies: [
-                .product(name: "Domain", package: "Domain")
+                .product(name: "Domain", package: "Domain"),
+                .product(name: "RealmSwift", package: "realm-cocoa")
             ],
             resources: [
                 .process("Resources")
