@@ -30,7 +30,7 @@ public struct UsersListView: View {
                 .listRowSeparator(.hidden)
                 .onAppear {
                     if viewModel.isLastItem(user) {
-                        viewModel.getUsers(isInitial: false)
+                        viewModel.getMoreUsers()
                     }
                 }
                 .onTapGesture {
@@ -52,7 +52,7 @@ public struct UsersListView: View {
         .navigationBarTitleDisplayMode(.inline)
         .onAppear {
             if viewModel.users.isEmpty {
-                viewModel.getUsers()
+                viewModel.loadUsers()
             }
         }
     }

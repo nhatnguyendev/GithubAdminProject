@@ -11,6 +11,8 @@ import Combine
 public protocol UsersListUseCaseProtocol {
     var paginationPolicy: PaginationPolicy { get }
     func getUsers(since: Int) -> AnyPublisher<[UserEntity], Error>
+    func getCachedUsers() -> [UserEntity]
+    func saveUsers(_ users: [UserEntity])
 }
 
 public final class UsersListUseCase: UsersListUseCaseProtocol {
@@ -30,5 +32,13 @@ public final class UsersListUseCase: UsersListUseCaseProtocol {
             perPage: paginationPolicy.itemsPerPage,
             since: since
         )
+    }
+    
+    public func getCachedUsers() -> [UserEntity] {
+        return userRepository.getCachedUsers()
+    }
+    
+    public func saveUsers(_ users: [UserEntity]) {
+        return userRepository.cacheUsers(users)
     }
 }

@@ -29,13 +29,15 @@ public final class UsersListViewModel: ObservableObject {
         return user.id == users.last?.id
     }
     
-    func getUsers(isInitial: Bool = true) {
-        
-        if isInitial {
-            users = []
-            currentPage = 0
-            hasMoreData = true
+    func loadUsers() {
+        let cachedUsers = usersListUseCase.getCachedUsers()
+        if !cachedUsers.isEmpty {
+            self.users = cachedUsers
         }
+        getMoreUsers()
+    }
+    
+    func getMoreUsers() {
         
         guard !isLoading, hasMoreData else { return }
         
@@ -54,7 +56,14 @@ public final class UsersListViewModel: ObservableObject {
                 }
             } receiveValue: { [weak self] users in
                 guard let self else { return }
-                self.users.append(contentsOf: users)
+                
+                if since == 0 {
+                    self.users = users
+                    self.usersListUseCase.saveUsers(users) // Save new users
+                } else {
+                    self.users.append(contentsOf: users)
+                }
+                
                 self.currentPage += 1
                 self.hasMoreData = !users.isEmpty
                 self.isLoading = false
