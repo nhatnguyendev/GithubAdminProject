@@ -15,18 +15,18 @@ public final class RealmManager: RealmManagerProtocol {
     
     private var realm: Realm?
     private let configuration: Realm.Configuration
-    private static let schemaVersion: UInt64 = 1
+    public static let schemaVersion: UInt64 = 1
     
-    public init() {
-        
-        self.configuration = Realm.Configuration(
-            schemaVersion: RealmManager.schemaVersion, // Set the schema version her
-            migrationBlock: { migration, oldSchemaVersion in
-                if oldSchemaVersion < RealmManager.schemaVersion {
-                    // Handle migration logic here if needed
-                }
+    public init(configuration: Realm.Configuration = Realm.Configuration(
+        schemaVersion: RealmManager.schemaVersion,
+        migrationBlock: { migration, oldSchemaVersion in
+            if oldSchemaVersion < RealmManager.schemaVersion {
+                // Handle migration logic here if needed
             }
-        )
+        }
+    ))
+    {
+        self.configuration = configuration
         
         do {
             self.realm = try Realm(configuration: configuration)
