@@ -5,7 +5,6 @@
 //  Created by Nhat Nguyen on 20/4/25.
 //
 
-import Data
 import Domain
 import Combine
 
@@ -22,9 +21,20 @@ final class MockUserRepository: UserRepositoryProtocol {
         .eraseToAnyPublisher()
     }
     
-    func fetchUserDetail(loginUserName id: String) -> AnyPublisher<UserEntity, Error> {
+    func fetchUserDetail(loginUserName: String) -> AnyPublisher<UserEntity, Error> {
         return Just(UserEntity.mock)
             .setFailureType(to: Error.self)
             .eraseToAnyPublisher()
+    }
+    
+    func getCachedUsers() -> [Domain.UserEntity] {
+        return [
+            UserEntity.mock,
+            UserEntity.mock,
+        ]
+    }
+    
+    func cacheUsers(_ users: [Domain.UserEntity]) {
+    
     }
 }
