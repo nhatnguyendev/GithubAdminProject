@@ -18,18 +18,10 @@ struct GithubAdminProjectApp: App {
     var body: some Scene {
         WindowGroup {
             NavigationStack(path: $router.path) {
-                UsersListView(
-                    viewModel: .init(
-                        usersListUseCase: UsersListUseCase(
-                            userRepository: UserRepository(
-                                apiService: APIService()
-                            )
-                        )
-                    )
-                )
-                .navigationDestination(for: AppDestination.self) { des in
-                    router.handleNavigation(for: des)
-                }
+                AppDIContainer.shared.makeUsersListView()
+                    .navigationDestination(for: AppDestination.self) { des in
+                        router.handleNavigation(for: des)
+                    }
             }
             .environmentObject(router)
         }
