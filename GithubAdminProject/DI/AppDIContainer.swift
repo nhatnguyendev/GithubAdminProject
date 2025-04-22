@@ -16,16 +16,15 @@ final class AppDIContainer {
     private init() {}
 
     private lazy var apiService: APIServiceProtocol = APIService()
+    private lazy var userRepository: UserRepositoryProtocol = UserRepository(apiService: apiService)
 
     func makeUserDetailView(loginName: String) -> some View {
-        let userRepository = UserRepository(apiService: apiService)
         let userDetailUseCase = UserDetailUseCase(userRepository: userRepository)
         let userDetailViewModel = UserDetailViewModel(loginUserName: loginName, userDetailUseCase: userDetailUseCase)
         return UserDetailView(viewModel: userDetailViewModel)
     }
     
     func makeUsersListView() -> some View {
-        let userRepository = UserRepository(apiService: apiService)
         let usersListUseCase = UsersListUseCase(userRepository: userRepository)
         let usersListViewModel = UsersListViewModel(usersListUseCase: usersListUseCase)
         return UsersListView(viewModel: usersListViewModel)
