@@ -66,5 +66,7 @@ final class UserDetailsViewModelTests: XCTestCase {
         
         XCTAssertEqual(viewModel.name, viewModel.loginUserName)
         XCTAssertEqual(viewModel.blog, "http://souja.net")
+        XCTAssertEqual(viewModel.noOfFollowers, 50)
+        XCTAssertEqual(viewModel.noOfFollowing, 100)
     }
 }
