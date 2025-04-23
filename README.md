@@ -55,8 +55,8 @@ The project is organized into multiple modules, each with a clearly defined resp
 +--------+-----------+
 |  Domain            |
 +--------+-----------+
+         ^
          |
-         v
 +--------+-----------+
 |  Data              |
 +--------------------+
