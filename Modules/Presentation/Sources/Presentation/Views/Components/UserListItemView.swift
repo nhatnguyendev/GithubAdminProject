@@ -29,36 +29,34 @@ public struct UserListItemView: View {
     }
     
     public var body: some View {
-        HStack(alignment: .top, spacing: 0) {
-            Group {
-                CachedAsyncImageView(url: avatar, imageSize: imageSize)
-                    .padding(DesignSystem.Padding.medium)
-                    .background(.gray.opacity(0.06))
-                    .cornerRadius(DesignSystem.CornerRadius.small)
+        HStack(alignment: .top, spacing: DesignSystem.Padding.medium) {
+            CachedAsyncImageView(url: avatar, imageSize: imageSize)
+                .padding(DesignSystem.Padding.xSmall)
+                .background(.gray.opacity(0.08))
+                .cornerRadius(DesignSystem.CornerRadius.small)
+                .padding([.top, .leading, .bottom], DesignSystem.Padding.medium)
+            
+            VStack(alignment: .leading, spacing: DesignSystem.Padding.small) {
+                Text(name)
+                    .font(.headline)
                 
-                VStack(alignment: .leading, spacing: DesignSystem.Padding.small) {
-                    Text(name)
-                        .font(.headline)
-                    
-                    Divider()
-                    
-                    if let link {
-                        Text(link)
-                            .font(.subheadline)
-                            .foregroundColor(.blue.opacity(0.5))
-                    }
-                    
-                    if let location {
-                        LocationLabelView(locationName: location)
-                    }
+                Divider()
+                
+                if let link {
+                    Text(link)
+                        .hyperlink(link)
+                }
+                
+                if let location {
+                    LocationLabelView(locationName: location)
                 }
             }
-            .padding()
+            .padding([.top, .trailing, .bottom], DesignSystem.Padding.medium)
         }
         .expandWidth(alignment: .leading)
         .background(.white)
         .cornerRadius(DesignSystem.CornerRadius.small)
-        .customShadow(color: .black.opacity(0.3))
+        .customShadow(color: .black.opacity(0.3), radius: 2.6)
         .padding(.horizontal, DesignSystem.Padding.medium)
         .padding(.vertical, DesignSystem.Padding.small)
     }

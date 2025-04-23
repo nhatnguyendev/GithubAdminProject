@@ -47,3 +47,15 @@ public extension View {
             .listRowInsets(EdgeInsets())
     }
 }
+
+extension View {
+    func hyperlink(_ urlString: String) -> some View {
+        self
+            .foregroundColor(.blue.opacity(0.5))
+            .underline()
+            .onTapGesture {
+                guard let url = URL(string: urlString) else { return }
+                UIApplication.shared.open(url)
+            }
+    }
+}
