@@ -35,12 +35,8 @@ public final class RealmManager: RealmManagerProtocol {
         }
     }
     
-    private func safeRealm() -> Realm? {
-        return realm
-    }
-    
     public func get<T: Object>(_ type: T.Type) -> [T] {
-        guard let realm = safeRealm() else {
+        guard let realm = realm else {
             return []
         }
         let objects = realm.objects(type)
@@ -48,7 +44,7 @@ public final class RealmManager: RealmManagerProtocol {
     }
     
     public func write<T: Object>(_ objects: [T]) throws {
-        guard let realm = safeRealm() else {
+        guard let realm = realm else {
             throw RealmError.realmNotInitialized
         }
         do {
@@ -61,7 +57,7 @@ public final class RealmManager: RealmManagerProtocol {
     }
     
     public func write<T: Object>(_ object: T) throws {
-        guard let realm = safeRealm() else {
+        guard let realm = realm else {
             throw RealmError.realmNotInitialized
         }
         do {
