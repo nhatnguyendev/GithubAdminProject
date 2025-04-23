@@ -54,4 +54,26 @@ final class UserListUseCaseTests: XCTestCase {
         
         wait(for: [expectation], timeout: 1.0)
     }
+    
+    func test_getUsers_and_cacheUsers_success() {
+        let expectation = self.expectation(description: "Get users and cache successfully since 0")
+        
+        let userListUseCase = UsersListUseCase(
+            paginationPolicy: MockPaginationPolicy(),
+            userRepository: mockUserRepository
+        )
+        userListUseCase.getUsers(since: 0)
+            .sink { completion in
+                if case .failure(let error) = completion {
+                    XCTFail("Expected success but got error: \(error)")
+                }
+            } receiveValue: { [weak self] users in
+                guard let self else { return }
+                XCTAssertEqual(self.mockUserRepository.cachedUsers.count, 2)
+                expectation.fulfill()
+            }
+            .store(in: &cancellables)
+        
+        wait(for: [expectation], timeout: 1.0)
+    }
 }

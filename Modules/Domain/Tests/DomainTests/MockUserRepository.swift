@@ -10,6 +10,8 @@ import Combine
 
 final class MockUserRepository: UserRepositoryProtocol {
     
+    private(set) var cachedUsers: [UserEntity] = []
+    
     func fetchUsers(perPage: Int, since: Int) -> AnyPublisher<[UserEntity], Error> {
         return Just(
             [
@@ -35,6 +37,6 @@ final class MockUserRepository: UserRepositoryProtocol {
     }
     
     func cacheUsers(_ users: [Domain.UserEntity]) {
-    
+        cachedUsers.append(contentsOf: users)
     }
 }
