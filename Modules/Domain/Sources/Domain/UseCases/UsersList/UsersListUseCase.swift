@@ -32,6 +32,13 @@ public final class UsersListUseCase: UsersListUseCaseProtocol {
             perPage: paginationPolicy.itemsPerPage,
             since: since
         )
+        .receive(on: DispatchQueue.main)
+        .handleEvents(receiveOutput: { [weak self] users in
+            if since == 0 {
+                self?.saveUsers(users)
+            }
+        })
+        .eraseToAnyPublisher()
     }
     
     public func getCachedUsers() -> [UserEntity] {
@@ -39,6 +46,6 @@ public final class UsersListUseCase: UsersListUseCaseProtocol {
     }
     
     public func saveUsers(_ users: [UserEntity]) {
-        return userRepository.cacheUsers(users)
+        userRepository.cacheUsers(users)
     }
 }

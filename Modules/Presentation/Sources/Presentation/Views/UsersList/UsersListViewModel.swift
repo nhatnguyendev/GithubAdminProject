@@ -59,7 +59,6 @@ public final class UsersListViewModel: ObservableObject {
                 
                 if since == 0 {
                     self.users = users
-                    self.usersListUseCase.saveUsers(users) // Save new users
                 } else {
                     self.users.append(contentsOf: users)
                 }
