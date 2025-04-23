@@ -1,10 +1,10 @@
-# 📱 GithubAdminProject
+# GithubAdminProject - Nhat Nguyen
 
-A modular iOS application designed with **Clean Architecture** principles. This approach ensures scalability, testability, and long-term maintainability.
+A modular iOS application designed with MVVM - Clean Architecture principles. This approach ensures scalability, testability, and long-term maintainability.
 
 ---
 
-## 🧱 Architecture Overview
+## 🏛️ Architecture Overview
 
 The project is organized into multiple modules, each with a clearly defined responsibility:
 
@@ -25,7 +25,7 @@ The project is organized into multiple modules, each with a clearly defined resp
 - Free from external dependencies.
 - Includes:
   - Entities
-  - UseCases
+  - UseCases (Users list, User details)
   - Policy Logic (e.g., pagination rules)
   - Repository Protocols (defined interfaces for data interaction)
 
