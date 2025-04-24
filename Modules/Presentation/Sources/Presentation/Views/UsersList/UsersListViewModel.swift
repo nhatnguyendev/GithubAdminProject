@@ -15,6 +15,9 @@ public final class UsersListViewModel: ObservableObject {
     @Published private(set) var isLoading = false
     @Published private(set) var hasMoreData = true
     
+    @Published private(set) var errorMessage: String = ""
+    @Published var showErrorAlert: Bool = false
+    
     private(set) var currentPage = 0
     
     private var cancellables: Set<AnyCancellable> = []
@@ -52,7 +55,8 @@ public final class UsersListViewModel: ObservableObject {
                 guard let self else { return }
                 self.isLoading = false
                 if case .failure(let error) = completion {
-                    print("Failed to load users: \(error)")
+                    self.errorMessage = error.localizedDescription
+                    self.showErrorAlert = true
                 }
             } receiveValue: { [weak self] users in
                 guard let self else { return }

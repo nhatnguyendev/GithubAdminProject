@@ -42,7 +42,7 @@ public struct UsersListView: View {
                 HStack {
                     Spacer()
                     ProgressView()
-                        .padding()
+                        .frame(height: 44)
                     Spacer()
                 }
             }
@@ -54,6 +54,11 @@ public struct UsersListView: View {
             if viewModel.users.isEmpty {
                 viewModel.loadUsers()
             }
+        }
+        .alert("Error", isPresented: $viewModel.showErrorAlert) {
+            Button("OK", role: .cancel) { }
+        } message: {
+            Text(viewModel.errorMessage)
         }
     }
 }
