@@ -2,6 +2,9 @@
 
 A modular iOS application designed with MVVM - Clean Architecture principles. This approach ensures scalability, testability, and long-term maintainability.
 
+<img src="https://github.com/user-attachments/assets/f48e6e07-fc3c-44f0-9213-09a71d50a43c" alt="simulator screenshot" width="200"/>
+<img src="https://github.com/user-attachments/assets/008137ac-d502-42cb-9a90-1458a0dfc059" alt="simulator screenshot" width="200"/>
+
 ---
 
 ## 🏛️ Architecture Overview
@@ -11,7 +14,7 @@ The project is organized into multiple modules, each with a clearly defined resp
 ### ✅ Presentation module
 
 - Manages the UI and handles user interactions.
-- Communicates with `UseCases` to trigger business logic.
+- Communicates with UseCases to trigger business logic.
 - Includes:
   - Views (Main Screens and Reusable Components)
   - ViewModels (Combine-based)
@@ -41,6 +44,11 @@ The project is organized into multiple modules, each with a clearly defined resp
   - Mappers (convert between data and domain models)
   - Mock Data
   - Utilities
+ 
+### ✅ Main app
+
+- AppDIContainer (Composition root)
+- Router - Navigation Handling
 
 ---
 
