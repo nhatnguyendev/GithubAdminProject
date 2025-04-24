@@ -13,8 +13,13 @@ import Domain
 final class MockUserDetailsUseCase: UserDetailUseCaseProtocol {
     
     var mockUser: UserEntity = .mock
+    var shouldError: Bool = false
     
     func getUserDetail(loginUserName: String) -> AnyPublisher<Domain.UserEntity, any Error> {
+        if shouldError {
+            return Fail(error: URLError(.timedOut))
+                        .eraseToAnyPublisher()
+        }
         return Just(mockUser)
             .setFailureType(to: Error.self)
             .eraseToAnyPublisher()
@@ -53,8 +58,7 @@ final class UserDetailsViewModelTests: XCTestCase {
                 if case .failure(let error) = completion {
                     XCTFail("Test failed with error: \(error.localizedDescription)")
                 }
-            }, receiveValue: { [weak self] user in
-                guard let self else { return }
+            }, receiveValue: { user in
                 if user != nil {
                     expectation.fulfill()
                 }
@@ -68,5 +72,22 @@ final class UserDetailsViewModelTests: XCTestCase {
         XCTAssertEqual(viewModel.blog, "http://souja.net")
         XCTAssertEqual(viewModel.noOfFollowers, 50)
         XCTAssertEqual(viewModel.noOfFollowing, 100)
+    }
+    
+    func test_getUserDetails_setsErrorAndErrorMessage() {
+        mockUseCase.shouldError = true
+        let expectation = expectation(description: "Load user should fail and emit error")
+        viewModel.$showErrorAlert
+            .dropFirst()
+            .sink { showAlert in
+                if showAlert {
+                    XCTAssertEqual(self.viewModel.errorMessage, URLError(.timedOut).localizedDescription)
+                    expectation.fulfill()
+                }
+            }
+            .store(in: &cancellables)
+        
+        viewModel.getUserDetail()
+        wait(for: [expectation], timeout: 1)
     }
 }
