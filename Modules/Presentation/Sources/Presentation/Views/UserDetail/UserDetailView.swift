@@ -56,5 +56,10 @@ public struct UserDetailView: View {
         }
         .navigationTitle("User Details")
         .navigationBarTitleDisplayMode(.inline)
+        .alert("Error", isPresented: $viewModel.showErrorAlert) {
+            Button("OK", role: .cancel) { }
+        } message: {
+            Text(viewModel.errorMessage)
+        }
     }
 }

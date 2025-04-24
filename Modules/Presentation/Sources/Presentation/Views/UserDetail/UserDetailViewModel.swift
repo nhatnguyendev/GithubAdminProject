@@ -13,6 +13,9 @@ public final class UserDetailViewModel: ObservableObject {
     
     @Published private(set) var user: UserEntity?
     
+    @Published private(set) var errorMessage: String = ""
+    @Published var showErrorAlert: Bool = false
+    
     var avatar: URL? {
         return URL(string: user?.avatarURL ?? "")
     }
@@ -55,7 +58,10 @@ public final class UserDetailViewModel: ObservableObject {
             .subscribe(on: DispatchQueue.global())
             .receive(on: DispatchQueue.main)
             .sink { completion in
-                print("Get user detail completion \(completion)")
+                if case .failure(let error) = completion {
+                    self.errorMessage = error.localizedDescription
+                    self.showErrorAlert = true
+                }
             } receiveValue: { [weak self] user in
                 self?.user = user
             }
