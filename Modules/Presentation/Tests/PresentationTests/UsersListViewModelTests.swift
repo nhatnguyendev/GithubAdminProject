@@ -17,7 +17,13 @@ final class MockUsersListUseCase: UsersListUseCaseProtocol {
     var mockUsers: [UserEntity] = []
     var cachedUsers: [UserEntity] = []
     
+    var shouldError: Bool = false
+    
     func getUsers(since: Int) -> AnyPublisher<[UserEntity], Error> {
+        if shouldError {
+            return Fail(error: URLError(.timedOut))
+                        .eraseToAnyPublisher()
+        }
         return Just(mockUsers)
             .setFailureType(to: Error.self)
             .eraseToAnyPublisher()
@@ -81,6 +87,24 @@ final class UsersListViewModelTests: XCTestCase {
         XCTAssertEqual(self.viewModel.users.count, itemsPerPage)
         XCTAssertEqual(self.viewModel.currentPage, 1)
         XCTAssertTrue(self.viewModel.hasMoreData)
+    }
+    
+    func test_getUsers_setsErrorAndErrorMessage() {
+        mockUseCase.shouldError = true
+        mockUseCase.mockUsers = []
+        let expectation = expectation(description: "Load users should fail and emit error")
+        viewModel.$showErrorAlert
+            .dropFirst()
+            .sink { showAlert in
+                if showAlert {
+                    XCTAssertEqual(self.viewModel.errorMessage, URLError(.timedOut).localizedDescription)
+                    expectation.fulfill()
+                }
+            }
+            .store(in: &cancellables)
+        
+        viewModel.loadUsers()
+        wait(for: [expectation], timeout: 1)
     }
     
     func test_loadingFlag_isFalseAfterGetUsersCompletes() {
