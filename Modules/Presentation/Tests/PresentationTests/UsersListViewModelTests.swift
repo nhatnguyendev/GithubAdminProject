@@ -129,7 +129,7 @@ final class UsersListViewModelTests: XCTestCase {
             })
             .store(in: &cancellables)
         
-        viewModel.loadUsers()
+        viewModel.getMoreUsers()
         wait(for: [expectation], timeout: 1)
         
         // Assert after finished call
